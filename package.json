@@ -5,7 +5,7 @@
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",
   "author": "Blake Knight <oss.ideas@gmail.com> (https://blakek.me/)",
-  "description": "💔 Split and chunk arrays",
+  "description": "💔 Split and chunk arrays, strings, and more",
   "bugs": {
     "url": "https://github.com/blakek/array-split/issues"
   },

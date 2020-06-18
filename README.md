@@ -1,6 +1,6 @@
 # array-split
 
-> 💔 Split and chunk arrays
+> 💔 Split and chunk arrays, strings, and more
 
 Functions to help split an array at an index and chunk an array into pieces.
 
@@ -32,13 +32,13 @@ Chunks an array into pieces of a given size.
 import { chunk } from '@blakek/array-split';
 
 chunk(2, [1, 2, 3, 4]);
-//» [ [ 1, 2 ], [ 3, 4 ] ]
+//» [[1, 2], [3, 4]]
 
-chunk(3, ['a', 'b', 'c', 'd', 'e']);
-//» [ [ 'a', 'b', 'c' ], [ 'd', 'e' ] ]
+chunk(3, 'abcdefghij');
+//» ['abc', 'def', 'ghi', 'j']
 
 chunk(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-//» [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ], [ 10, 11 ] ]
+//» [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11]]
 ```
 
 ### `splitAtIndex`
@@ -56,16 +56,43 @@ Note, you may pass a negative index to split at the end of the array.
 import { splitAtIndex } from '@blakek/array-split';
 
 splitAtIndex(0, [1, 2, 3, 4]);
-//» [ [], [ 1, 2, 3, 4 ] ]
+//» [[], [1, 2, 3, 4]]
 
 splitAtIndex(1, [1, 2, 3, 4]);
-//» [ [ 1 ], [ 2, 3, 4 ] ]
+//» [[ 1 ], [2, 3, 4]]
 
 splitAtIndex(-1, ['a', 'b', 'c']);
-//» [ [ 'a', 'b' ], [ 'c' ] ]
+//» [[ 'a', 'b' ], ['c']]
 
 splitAtIndex(3, ['a', 'b', 'c', 'd', 'e']);
-//» [ [ 'a', 'b', 'c' ], [ 'd', 'e' ] ]
+//» [['a', 'b', 'c'], ['d', 'e']]
+
+splitAtIndex(1, 'abc');
+//» ['a', 'bc']
+```
+
+### `splitAtIndices`
+
+```ts
+function splitAtIndices<T extends Sliceable>(
+  [index, nextIndex, ...indices]: number[],
+  array: T
+): T[];
+```
+
+Similar to `splitAtIndex` but slices an array at multiple indices.
+
+```js
+import { splitAtIndices } from '@blakek/array-split';
+
+splitAtIndices([1, 3], ['a', 'b', 'c', 'd', 'e']);
+//» [['a'], ['b', 'c'], ['d', 'e']]
+
+splitAtIndices([2, 5], 'blakek');
+//» ['bl', 'ake', 'k']
+
+splitAtIndices([-4, -1], 'github');
+//» ['gi', 'thu', 'b']
 ```
 
 ## Contributing
