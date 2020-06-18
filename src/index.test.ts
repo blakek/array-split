@@ -1,5 +1,5 @@
 import test from 'ava';
-import { chunk, splitAtIndex } from './index';
+import { chunk, splitAtIndex, splitAtIndices } from './index';
 
 test('splits arrays at a given index', t => {
   t.deepEqual(
@@ -79,4 +79,48 @@ test('chunks strings', t => {
   t.deepEqual(chunk(3, 'abcdefghijk'), ['abc', 'def', 'ghi', 'jk']);
 
   t.deepEqual(chunk(6, 'a'), ['a'], 'handles chunk larger than input');
+});
+
+test('split at multiple indices', t => {
+  t.deepEqual(
+    splitAtIndices([1, 3], ['a', 'b', 'c', 'd', 'e']),
+    [['a'], ['b', 'c'], ['d', 'e']],
+    'expected to work with basic index - array'
+  );
+
+  t.deepEqual(
+    splitAtIndices([2, 5], 'blakek'),
+    ['bl', 'ake', 'k'],
+    'expected to work with basic index - string'
+  );
+
+  t.deepEqual(
+    splitAtIndices([], []),
+    [[]],
+    'expected to work with empty array'
+  );
+
+  t.deepEqual(
+    splitAtIndices([1, 10], ['blakek', 'github', 'test']),
+    [['blakek'], ['github', 'test'], []],
+    'expected to work with out-of-bound index - array'
+  );
+
+  t.deepEqual(
+    splitAtIndices([2, 10], 'test'),
+    ['te', 'st', ''],
+    'expected to work with out-of-bound index - string'
+  );
+
+  t.deepEqual(
+    splitAtIndices([-2, -1], ['z', 'y', 'x', 'w', 'v']),
+    [['z', 'y', 'x'], ['w'], ['v']],
+    'expected to work with negative index - array'
+  );
+
+  t.deepEqual(
+    splitAtIndices([-4, -1], 'github'),
+    ['gi', 'thu', 'b'],
+    'expected to work with negative index - string'
+  );
 });
