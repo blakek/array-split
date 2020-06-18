@@ -23,7 +23,7 @@ $ npm i --save @blakek/array-split
 ### `chunk`
 
 ```ts
-function chunk<T extends any[]>(array: T, chunkSize: number): T[];
+function chunk<T extends Sliceable>(chunkSize: number, array: T): T[];
 ```
 
 Chunks an array into pieces of a given size.
@@ -31,20 +31,20 @@ Chunks an array into pieces of a given size.
 ```js
 import { chunk } from '@blakek/array-split';
 
-chunk([1, 2, 3, 4], 2);
+chunk(2, [1, 2, 3, 4]);
 //» [ [ 1, 2 ], [ 3, 4 ] ]
 
-chunk(['a', 'b', 'c', 'd', 'e'], 3);
+chunk(3, ['a', 'b', 'c', 'd', 'e']);
 //» [ [ 'a', 'b', 'c' ], [ 'd', 'e' ] ]
 
-chunk([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 3);
+chunk(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 //» [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ], [ 10, 11 ] ]
 ```
 
 ### `splitAtIndex`
 
 ```ts
-function splitAtIndex<T extends any[]>(array: T, index: number): T[];
+function splitAtIndex<T extends Sliceable>(index: number, array: T): T[];
 ```
 
 Splits an array into two pieces at the given index. Anything below the index is
@@ -55,16 +55,16 @@ Note, you may pass a negative index to split at the end of the array.
 ```js
 import { splitAtIndex } from '@blakek/array-split';
 
-splitAtIndex([1, 2, 3, 4], 0);
+splitAtIndex(0, [1, 2, 3, 4]);
 //» [ [], [ 1, 2, 3, 4 ] ]
 
-splitAtIndex([1, 2, 3, 4], 1);
+splitAtIndex(1, [1, 2, 3, 4]);
 //» [ [ 1 ], [ 2, 3, 4 ] ]
 
-splitAtIndex(['a', 'b', 'c'], -1);
+splitAtIndex(-1, ['a', 'b', 'c']);
 //» [ [ 'a', 'b' ], [ 'c' ] ]
 
-splitAtIndex(['a', 'b', 'c', 'd', 'e'], 3);
+splitAtIndex(3, ['a', 'b', 'c', 'd', 'e']);
 //» [ [ 'a', 'b', 'c' ], [ 'd', 'e' ] ]
 ```
 
