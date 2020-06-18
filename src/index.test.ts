@@ -28,7 +28,7 @@ test('splits arrays at a given index', t => {
 });
 
 test('chunks arrays', t => {
-  t.deepEqual(chunk([], 2), [], 'expected to work with empty array');
+  t.deepEqual(chunk([], 2), [[]], 'expected to work with empty array');
 
   t.deepEqual(chunk([5, 4, 3, 2], 2), [
     [5, 4],
@@ -41,6 +41,8 @@ test('chunks arrays', t => {
     [7, 8, 9],
     [10]
   ]);
+
+  t.deepEqual(chunk([123], 6), [[123]], 'handles chunk larger than input');
 });
 
 test('splits strings at a given index', t => {
@@ -67,4 +69,14 @@ test('splits strings at a given index', t => {
     ['', ''],
     'expected to work with empty string'
   );
+});
+
+test('chunks strings', t => {
+  t.deepEqual(chunk('', 2), [''], 'expected to work with empty string');
+
+  t.deepEqual(chunk('blakek', 2), ['bl', 'ak', 'ek']);
+
+  t.deepEqual(chunk('abcdefghijk', 3), ['abc', 'def', 'ghi', 'jk']);
+
+  t.deepEqual(chunk('a', 6), ['a'], 'handles chunk larger than input');
 });
