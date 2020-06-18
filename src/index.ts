@@ -3,6 +3,15 @@ interface Sliceable {
   slice: (start?: number | undefined, end?: number | undefined) => any;
 }
 
+export function chunk<T extends Sliceable>(chunkSize: number, array: T): T[] {
+  if (array.length <= chunkSize) return [array];
+
+  return [
+    array.slice(0, chunkSize),
+    ...chunk(chunkSize, array.slice(chunkSize))
+  ];
+}
+
 export function splitAtIndex<T extends Sliceable>(
   index: number,
   array: T
@@ -21,15 +30,6 @@ export function splitAtIndices<T extends Sliceable>(
   return [
     array.slice(0, index),
     ...splitAtIndices(nextIndices, array.slice(index))
-  ];
-}
-
-export function chunk<T extends Sliceable>(chunkSize: number, array: T): T[] {
-  if (array.length <= chunkSize) return [array];
-
-  return [
-    array.slice(0, chunkSize),
-    ...chunk(chunkSize, array.slice(chunkSize))
   ];
 }
 
