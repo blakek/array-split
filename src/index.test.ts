@@ -42,3 +42,29 @@ test('chunks arrays', t => {
     [10]
   ]);
 });
+
+test('splits strings at a given index', t => {
+  t.deepEqual(
+    splitAtIndex('abc', 1),
+    ['a', 'bc'],
+    'expected to work with basic index'
+  );
+
+  t.deepEqual(
+    splitAtIndex('laskdjf', -2),
+    ['laskd', 'jf'],
+    'expected to work with negative index'
+  );
+
+  t.deepEqual(
+    splitAtIndex('cool', 8),
+    ['cool', ''],
+    'expected to work with out-of-bound index'
+  );
+
+  t.deepEqual(
+    splitAtIndex('', 10),
+    ['', ''],
+    'expected to work with empty string'
+  );
+});

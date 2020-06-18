@@ -1,4 +1,11 @@
-export function splitAtIndex<T extends any[]>(array: T, index: number): T[] {
+interface Sliceable {
+  slice: (start?: number | undefined, end?: number | undefined) => any;
+}
+
+export function splitAtIndex<T extends Sliceable>(
+  array: T,
+  index: number
+): T[] {
   return [array.slice(0, index) as T, array.slice(index) as T];
 }
 
